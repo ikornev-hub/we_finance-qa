@@ -23,3 +23,8 @@ dev = [
     "pytest>=9.1.1",
     "ruff>=0.17.0",
 ]
+
+[tool.pytest.ini_options]
+markers = [
+    "smoke: quick autotests"
+]
