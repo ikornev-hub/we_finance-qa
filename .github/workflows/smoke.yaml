@@ -25,7 +25,7 @@ jobs:
 
   smoke:
     runs-on: ubuntu-latest
-    environment: ci
+    environment: smoke
     env:
       POSTGRES_USER: ${{ vars.POSTGRES_USER }}
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
