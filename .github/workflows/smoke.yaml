@@ -5,7 +5,12 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-
+    inputs:
+      image_tag:
+        description: "Тег образа backend (main, 0.1.1, sha-0e0e245)"
+        required: false
+        default: main
+        
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -27,6 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: smoke
     env:
+      BACKEND_IMAGE: ghcr.io/ikornev-hub/we_finance-backend:${{ inputs.image_tag || 'main' }}
       POSTGRES_USER: ${{ vars.POSTGRES_USER }}
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       POSTGRES_DB: ${{ vars.POSTGRES_DB }}
@@ -39,7 +45,9 @@ jobs:
       - uses: astral-sh/setup-uv@v7
       - name: Install dependencies
         run: uv sync --locked
-
+      - name: Show image under test
+        run: |
+          echo "Image: $BACKEND_IMAGE"
       - name: Start stand
         run: docker compose up -d --wait
 
