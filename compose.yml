@@ -24,6 +24,8 @@ services:
     environment:
       APP_ENV: "${APP_ENV}"
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@qc_finance_db:5432/${POSTGRES_DB}
+      CREDIT_DATA_PATH: /tmp/credit.json
+      SALARY_DATA_PATH: /tmp/salary.json
     ports:
       - "127.0.0.1:8000:8000"
     depends_on:
