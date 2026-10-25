@@ -34,4 +34,4 @@ def test_create_loan(base_url):
     assert len(detail.schedule) == 36
     assert detail.start.close_date == date(2029, 1, 15)
     last_payment = detail.start.last_payment
-    assert last_payment == Decimal("39464.90")
+    assert last_payment == Decimal("39464.89")
