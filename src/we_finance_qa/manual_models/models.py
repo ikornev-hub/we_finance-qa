@@ -46,8 +46,17 @@ class ScheduleRow(BaseModel):
     fee: Decimal
 
 
+class PaymentStatus(StrEnum):
+    """Статус платежа на дату: проведён, сегодня, запланирован."""
+
+    DONE = "done"
+    TODAY = "today"
+    PLANNED = "planned"
+
+
 class ScheduleItem(ScheduleRow):
     past: bool
+    status: PaymentStatus
 
 
 class EntryKind(StrEnum):
@@ -67,6 +76,7 @@ class HistoryEntry(BaseModel):
     interest: Decimal
     fee: Decimal
     balance: Decimal
+    status: PaymentStatus
 
 
 class LoanWarning(BaseModel):
